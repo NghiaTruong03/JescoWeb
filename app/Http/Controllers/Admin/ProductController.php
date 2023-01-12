@@ -32,7 +32,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {  
+    {
         $attr_value = AttrValue::all();
         $category = Category::all();
         $brand = Brand::all();
@@ -46,18 +46,18 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         //validation
-        $rules = [
-            'name' => 'required|unique:products',
-            'price' => 'required|digits_between:4,8',
-            'sale_price' => 'nullable|digits_between:4,8',
-            'category_id' => 'required',
-            'brand_id' => 'required',
-            'product_quantity' => 'required',
-            'image' => 'required',
-            // 'child_img' => 'nullable|image|mimes:jpg,png,jpeg,svg'
-        ];
+//        $rules = [
+//            'name' => 'required|unique:products',
+//            'price' => 'required|digits_between:4,8',
+//            'sale_price' => 'nullable|digits_between:4,8',
+//            'category_id' => 'required',
+//            'brand_id' => 'required',
+//            'product_quantity' => 'required',
+//            'image' => 'required',
+//            // 'child_img' => 'nullable|image|mimes:jpg,png,jpeg,svg'
+//        ];
 
         $messages = [
             'name.required' => 'Tên sản phẩm không được để trống',
@@ -73,19 +73,19 @@ class ProductController extends Controller
             // 'child_img.required' => 'Ảnh sản phẩm không được để trống',
             // 'child_img.image' => 'Ảnh phải có định dạng .jpg,png,jpeg',
         ];
-        $request->validate($rules,$messages);
+//        $request->validate($rules,$messages);
 
         $data = $request->all();
         // dd($data);
-        
-        //kiểm tra ảnh tồn tại 
+
+        //kiểm tra ảnh tồn tại
         if ($request->file('image')) {
             $request->file('image')->store('public');
             $data['image'] = $request->file('image')->hashName();
         }
         $product = Product::create($data)->id;
-        
-        if($product){      
+
+        if($product){
             //Kiểm tra ảnh con có tồn tại không, nếu có thì lưu trữ vào thư mục Storage
             if ($request->file('child_img')) {
                 foreach (($request->file('child_img')) as $value) {
@@ -153,7 +153,7 @@ class ProductController extends Controller
             'image' => 'required',
             // 'child_img' => 'nullable|image|mimes:jpg,png,jpeg,svg'
         ];
-        
+
         $messages = [
             'name.required' => 'Tên sản phẩm không được để trống',
             'price.required' => 'Giá sản phẩm không được để trống',
@@ -168,7 +168,7 @@ class ProductController extends Controller
             // 'child_img.image' => 'Ảnh phải có định dạng .jpg,png,jpeg',
         ];
         $request->validate($rules,$messages);
-        
+
         $data = $request->all();
         // dd($data);
         // Tìm id sản phẩm
@@ -225,7 +225,7 @@ class ProductController extends Controller
     {
         $delete = Product::find($id);
         $delete->delete();
-        
+
 
         if ($delete) {
             return redirect()->route('product.index')->with('success', 'Xóa thành công');
