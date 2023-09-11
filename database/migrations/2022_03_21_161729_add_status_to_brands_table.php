@@ -26,7 +26,7 @@ class AddStatusToBrandsTable extends Migration
     public function down()
     {
         Schema::table('brands', function (Blueprint $table) {
-            //
+            $table->dropColumn('status');
         });
     }
 }

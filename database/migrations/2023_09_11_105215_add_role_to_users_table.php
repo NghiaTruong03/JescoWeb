@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPaidToAttrsTable extends Migration
+class AddRoleToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddPaidToAttrsTable extends Migration
      */
     public function up()
     {
-        Schema::table('attrs', function (Blueprint $table) {
-            $table->tinyInteger('type');
+        Schema::table('users', function (Blueprint $table) {
+            $table->tinyInteger('role');
         });
     }
 
@@ -25,8 +25,8 @@ class AddPaidToAttrsTable extends Migration
      */
     public function down()
     {
-        Schema::table('attrs', function (Blueprint $table) {
-            $table->dropColumn('type');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role');
         });
     }
 }

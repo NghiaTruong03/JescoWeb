@@ -35,8 +35,6 @@ class AddOrderInfoToCarts extends Migration
             $table->dropColumn('order_phone');
             $table->dropColumn('order_address');
             $table->dropColumn('order_note');
-
-
         });
     }
 }

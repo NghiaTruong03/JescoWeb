@@ -26,7 +26,7 @@ class AddStatusToProducts extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->tinyInteger('status')->default(1);
+            $table->dropColumn('status');
         });
     }
 }
